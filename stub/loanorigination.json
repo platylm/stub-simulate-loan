@@ -1,0 +1,37 @@
+[
+    {    
+        "path": "/​v1/​loanorigination/​simulator/​calculate",
+        "request" : {
+            "loan": {
+                "productIntent": "GENERAL",
+                "totalRequestAmount": 100000.00,
+                "paymentFrequency": "Monthly",
+                "loanTenor": 24,
+                "installmentAmount": 5000.00,
+                "gracePeriod": 0,
+                "dueDay": 25
+            }
+        },
+        "status_code": 200,
+        "response": {
+            "status": {
+                "code": 1000,
+                "description": "Success"
+            },
+            "data": {
+                "loan": {
+                    "totalRequestAmount": 100000,
+                    "loanTenor": 24,
+                    "installmentAmount": 5000,
+                    "paymentFrequency": "Monthly",
+                    "installment": {
+                        "minAmount": 2290,
+                        "maxAmount": 17560
+                    },
+                    "interestRate": 18,
+                    "firstDueDate": "2019-05-25T00:00:00.000+07:00"
+                }
+            }
+        }
+    }
+]
