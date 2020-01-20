@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "4466083e-be2e-479c-9a2a-7b4eab00b4b9",
+		"name": "Test Simulate Loan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "simulate loan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19df9975-e69d-40cd-9dbd-db5b24c88010",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"totalRequestAmount is 100000.00\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.totalRequestAmount).to.eql(100000.00);",
+							"});",
+							"",
+							"pm.test(\"loanTenor is 24\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.loanTenor).to.eql(24);",
+							"});",
+							"",
+							"pm.test(\"installmentAmount is 5000.00\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.installmentAmount).to.eql(5000.00);",
+							"});",
+							"",
+							"pm.test(\"paymentFrequency is Monthly\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.paymentFrequency).to.eql(\"Monthly\");",
+							"});",
+							"",
+							"pm.test(\"minAmount is 2290.00\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.installment.minAmount).to.eql(2290.00);",
+							"});",
+							"",
+							"pm.test(\"maxAmount is 17560.00\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.installment.maxAmount).to.eql(17560.00);",
+							"});",
+							"",
+							"pm.test(\"interestRate is 18\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.interestRate).to.eql(18);",
+							"});",
+							"",
+							"pm.test(\"firstDueDate is 2019-05-25T00:00:00.000+07:00\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.loan.firstDueDate).to.eql(\"2019-05-25T00:00:00.000+07:00\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"type": "text",
+						"value": "Bearer dcd175a4-ecdf-4004-8161-732fc19a407f"
+					},
+					{
+						"key": "resourceOwnerId",
+						"type": "text",
+						"value": "dcd175a4-ecdf-4004-8161-732fc19a407f"
+					},
+					{
+						"key": "requestUId",
+						"type": "text",
+						"value": "{{$guid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"loan\": {\n        \"productIntent\": \"GENERAL\",\n        \"totalRequestAmount\": 100000,\n        \"paymentFrequency\": \"Monthly\",\n        \"loanTenor\": 24,\n        \"installmentAmount\": 5000,\n        \"gracePeriod\": 0,\n        \"dueDay\": 25\n    }\n}"
+				},
+				"url": {
+					"raw": "{{url}}v1/loanorigination/simulator/calculate",
+					"host": [
+						"{{url}}v1"
+					],
+					"path": [
+						"loanorigination",
+						"simulator",
+						"calculate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
